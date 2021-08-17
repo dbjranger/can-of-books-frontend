@@ -10,6 +10,7 @@ import Profile from "./Profile";
 import axios from 'axios';
 
 import { withAuth0 } from "@auth0/auth0-react";
+import LogoutButton from "./Logoutbutton";
 
 class App extends React.Component {
   makeRequest = async() => {
@@ -40,12 +41,12 @@ class App extends React.Component {
               <Header />
               <Switch>
                 <Route exact path="/">
-                  {user ? <BestBooks /> : <Login />}
-                  {user ? <Logoutbutton />: ''}
+                  {isAuthenticated ? <BestBooks /> : <Login />}
+                  {/* {user ? <Logoutbutton />: ''} */}
                 </Route>
                 
                 <Route exact path="/profile">
-                  {user ? <Profile /> : ''}
+                  {isAuthenticated ? <Profile /> : ''}
                 </Route>
               </Switch>
               <Footer />
