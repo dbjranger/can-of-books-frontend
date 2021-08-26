@@ -1,43 +1,25 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
-import Carousel from 'react-bootstrap/Carousel';
-import './Book.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+// import Jumbotron from 'react-bootstrap/Jumbotron';
+import './BestBooks.css';
+import { withAuth0 } from '@auth0/auth0-react';
+// import axios from 'axios';
+// import Book from './Book';
 
 class Book extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: this.props.data
-    }
-  }
-
   render() {
-    let booksToRender = this.state.data.map((book, index) => (
-      <Carousel.Item
-        key={index}>
-        <img
-          className=".d-block w-100"
-          src="https://s26162.pcdn.co/wp-content/uploads/2018/12/favoritebooks.jpg"
-          alt="pictures of books"
-        />
-        <Carousel.Caption>
-          <div id="white-wall">
-            <h3>{book.title}</h3>
-            <p>{book.description}</p>
-          </div>
-        </Carousel.Caption>
-      </Carousel.Item>
-    ));
-    return (
-      <Container >
-        <Carousel id="carousel" >
-          {booksToRender}
-        </Carousel>
-      </Container>
+    const { user } = this.props.auth0;
 
+    return (
+      <>
+          <h1>{this.props.book.name}</h1>
+          <p>
+            {this.props.book.description}
+          </p>
+      </>
     )
   }
 }
 
-export default Book;
+export default withAuth0(Book);
